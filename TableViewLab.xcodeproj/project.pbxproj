@@ -20,6 +20,7 @@
 		837C9570199F5710007F2DF1 /* TableViewLabTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C956F199F5710007F2DF1 /* TableViewLabTests.m */; };
 		837C957B199F5750007F2DF1 /* TVLMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C957A199F5750007F2DF1 /* TVLMainWindowController.m */; };
 		837C957D199F57DB007F2DF1 /* TVLMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 837C957C199F57DB007F2DF1 /* TVLMainWindow.xib */; };
+		837C9583199F8223007F2DF1 /* TVLPic.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C9582199F8223007F2DF1 /* TVLPic.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +47,7 @@
 		837C9557199F5710007F2DF1 /* TVLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TVLAppDelegate.h; path = TableViewLab/TVLAppDelegate.h; sourceTree = "<group>"; };
 		837C9558199F5710007F2DF1 /* TVLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TVLAppDelegate.m; path = TableViewLab/TVLAppDelegate.m; sourceTree = "<group>"; };
 		837C955B199F5710007F2DF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TVLMainMenu.xib; sourceTree = "<group>"; };
-		837C955D199F5710007F2DF1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		837C955D199F5710007F2DF1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = TableViewLab/Images.xcassets; sourceTree = "<group>"; };
 		837C9563199F5710007F2DF1 /* TableViewLabTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableViewLabTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		837C9564199F5710007F2DF1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		837C956B199F5710007F2DF1 /* TableViewLabTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TableViewLabTests-Info.plist"; sourceTree = "<group>"; };
@@ -55,6 +56,8 @@
 		837C9579199F5750007F2DF1 /* TVLMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVLMainWindowController.h; sourceTree = "<group>"; };
 		837C957A199F5750007F2DF1 /* TVLMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVLMainWindowController.m; sourceTree = "<group>"; };
 		837C957C199F57DB007F2DF1 /* TVLMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TVLMainWindow.xib; sourceTree = "<group>"; };
+		837C9581199F8223007F2DF1 /* TVLPic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVLPic.h; sourceTree = "<group>"; };
+		837C9582199F8223007F2DF1 /* TVLPic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVLPic.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +84,11 @@
 		837C9539199F5710007F2DF1 = {
 			isa = PBXGroup;
 			children = (
+				837C9584199F8231007F2DF1 /* Data Source */,
 				837C957E199F5816007F2DF1 /* App Controller */,
 				837C954B199F5710007F2DF1 /* Main Window Controller */,
+				837C955D199F5710007F2DF1 /* Images.xcassets */,
+				837C954C199F5710007F2DF1 /* Supporting Files */,
 				837C9569199F5710007F2DF1 /* TableViewLabTests */,
 				837C9544199F5710007F2DF1 /* Frameworks */,
 				837C9543199F5710007F2DF1 /* Products */,
@@ -124,8 +130,6 @@
 				837C9580199F5861007F2DF1 /* Resources */,
 				837C9579199F5750007F2DF1 /* TVLMainWindowController.h */,
 				837C957A199F5750007F2DF1 /* TVLMainWindowController.m */,
-				837C955D199F5710007F2DF1 /* Images.xcassets */,
-				837C954C199F5710007F2DF1 /* Supporting Files */,
 			);
 			name = "Main Window Controller";
 			path = TableViewLab;
@@ -141,6 +145,7 @@
 				837C9554199F5710007F2DF1 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			path = TableViewLab;
 			sourceTree = "<group>";
 		};
 		837C9569199F5710007F2DF1 /* TableViewLabTests */ = {
@@ -185,6 +190,15 @@
 				837C957C199F57DB007F2DF1 /* TVLMainWindow.xib */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		837C9584199F8231007F2DF1 /* Data Source */ = {
+			isa = PBXGroup;
+			children = (
+				837C9581199F8223007F2DF1 /* TVLPic.h */,
+				837C9582199F8223007F2DF1 /* TVLPic.m */,
+			);
+			name = "Data Source";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				837C957B199F5750007F2DF1 /* TVLMainWindowController.m in Sources */,
+				837C9583199F8223007F2DF1 /* TVLPic.m in Sources */,
 				837C9552199F5710007F2DF1 /* main.m in Sources */,
 				837C9559199F5710007F2DF1 /* TVLAppDelegate.m in Sources */,
 			);
@@ -505,6 +520,7 @@
 				837C9575199F5710007F2DF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		837C9576199F5710007F2DF1 /* Build configuration list for PBXNativeTarget "TableViewLabTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +529,7 @@
 				837C9578199F5710007F2DF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

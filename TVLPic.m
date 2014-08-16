@@ -31,27 +31,36 @@
  **                                                                         **
  ****************************************************************************/
 
-#import <Cocoa/Cocoa.h>
+#import "TVLPic.h"
 
-// TVLMainWindowController class
-@interface TVLMainWindowController : NSWindowController
-    <NSTableViewDataSource, NSTableViewDelegate /* Conforms <NSErrorRecoveryAttempting> imformal protocol */>
+// TVLPic class
+@implementation TVLPic
 
-@property ( assign ) IBOutlet NSWindow* _mainWindow;
+@synthesize _name;
+@synthesize _absolutePath;
 
-// Data source
-@property ( retain, atomic ) NSMutableArray* _pics;
+@synthesize _image;
 
-@property ( assign ) IBOutlet NSTableView* _picsTableView;
-@property ( assign ) IBOutlet NSButton* _importPicsButton;
-@property ( retain ) NSOpenPanel* _importPicsOpenPanel;
+#pragma mark Initializers & Deallocators
++ ( id ) picWithURL: ( NSURL* )_URL
+    {
+    return [ [ [ [ self class ] alloc ] initWithURL: _URL ] autorelease ];
+    }
 
-+ ( id ) mainWindowController;
+- ( id ) initWithURL: ( NSURL* )_URL
+    {
+    if ( self = [ super init ] )
+        {
+        self._absolutePath = _URL;
+        self._name = [ _URL lastPathComponent ];
 
-#pragma mark IBActions
-- ( IBAction ) importPics: ( id )_Sender;
+        _image = [ [ [ [ NSImage alloc ] initWithContentsOfURL: _URL ] autorelease ] retain ];
+        }
 
-@end // TVLMainWindowController
+    return self;
+    }
+
+@end // TVLPic
 
 /////////////////////////////////////////////////////////////////////////////
 

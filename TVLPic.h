@@ -33,25 +33,17 @@
 
 #import <Cocoa/Cocoa.h>
 
-// TVLMainWindowController class
-@interface TVLMainWindowController : NSWindowController
-    <NSTableViewDataSource, NSTableViewDelegate /* Conforms <NSErrorRecoveryAttempting> imformal protocol */>
+// TVLPic class
+@interface TVLPic : NSObject
 
-@property ( assign ) IBOutlet NSWindow* _mainWindow;
+@property ( retain ) NSString* _name;
+@property ( retain ) NSURL* _absolutePath;
 
-// Data source
-@property ( retain, atomic ) NSMutableArray* _pics;
+@property ( retain, readonly ) NSImage* _image;
 
-@property ( assign ) IBOutlet NSTableView* _picsTableView;
-@property ( assign ) IBOutlet NSButton* _importPicsButton;
-@property ( retain ) NSOpenPanel* _importPicsOpenPanel;
++ ( id ) picWithURL: ( NSURL* )_URL;
 
-+ ( id ) mainWindowController;
-
-#pragma mark IBActions
-- ( IBAction ) importPics: ( id )_Sender;
-
-@end // TVLMainWindowController
+@end // TVLPic
 
 /////////////////////////////////////////////////////////////////////////////
 
