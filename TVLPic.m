@@ -55,6 +55,7 @@
         self._name = [ _URL lastPathComponent ];
 
         _image = [ [ [ [ NSImage alloc ] initWithContentsOfURL: _URL ] autorelease ] retain ];
+        [ _image setSize: NSMakeSize( 16, 16 ) ];
         }
 
     return self;

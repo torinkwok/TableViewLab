@@ -73,31 +73,25 @@
     return [ self._pics count ];
     }
 
-- ( id )            tableView: ( NSTableView* )_TableView
-    objectValueForTableColumn: ( NSTableColumn* )_Column
-                          row: ( NSInteger )_Row
+#pragma mark Conforms <NSTableViewDelegate> protocol
+- ( NSView* ) tableView: ( NSTableView* )_TableView
+     viewForTableColumn: ( NSTableColumn* )_Column
+                    row: ( NSInteger )_Row
     {
-    TVLPic* object = [ self._pics objectAtIndex: _Row ];
+    NSTableCellView* cell = [ _TableView makeViewWithIdentifier: NSLocalizedString( @"Pic Name", nil ) owner: self ];
 
     NSString* columnID = [ _Column identifier ];
     if ( [ columnID isEqualToString: NSLocalizedString( @"Pic Name", nil ) ] )
-        return [ object _name ];
+        {
+        [ [ cell imageView ] setImage: [ self._pics[ _Row ] _image ] ];
+        [ [ cell textField ] setStringValue: [ self._pics[ _Row ] _name ] ];
+        }
     else if ( [ columnID isEqualToString: NSLocalizedString( @"Absolute Path", nil ) ] )
-        return [ object _absolutePath ];
+        {
+        [ [ cell textField ] setStringValue: [ self._pics[ _Row ] _absolutePath ].absoluteString ];
+        }
 
-    return nil;
-    }
-
-- ( void )   tableView: ( NSTableView* )_TableView
-        setObjectValue: ( id )_Object
-        forTableColumn: ( NSTableColumn* )_TableColumn
-                   row: ( NSInteger )_Row
-    {
-    NSString* columnID = [ _TableColumn identifier ];
-    if ( [ columnID isEqualToString: NSLocalizedString( @"Pic Name", nil ) ] )
-        [ self._pics[ _Row ] set_name: _Object ];
-    else if ( [ columnID isEqualToString: NSLocalizedString( @"Absolute Path", nil ) ] )
-        [ self._pics[ _Row ] set_absolutePath: _Object ];
+    return cell;
     }
 
 #pragma mark IBActions
