@@ -30,7 +30,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="r2X-Fs-OkJ" viewBased="YES" id="VzS-MX-hga">
-                                    <rect key="frame" x="0.0" y="0.0" width="677.5" height="366"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="677" height="366"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -70,7 +70,7 @@
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn identifier="Absolute Path" width="528" minWidth="40" maxWidth="1000" id="yIY-67-0mw">
+                                        <tableColumn identifier="Absolute Path" width="527.5" minWidth="40" maxWidth="1000" id="yIY-67-0mw">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Absolute Path">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -84,11 +84,11 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="rPp-9l-CTO">
-                                                    <rect key="frame" x="147.5" y="1" width="528" height="17"/>
+                                                    <rect key="frame" x="147.5" y="1" width="527.5" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tG6-cE-A6y">
-                                                            <rect key="frame" x="0.0" y="0.0" width="528" height="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="527.5" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="pyT-MX-H3I">
                                                                 <font key="font" metaFont="system"/>
@@ -112,7 +112,7 @@
                             </subviews>
                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
-                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="pxi-Op-tzF">
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="pxi-Op-tzF">
                             <rect key="frame" x="1" y="367" width="677" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -121,7 +121,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <tableHeaderView key="headerView" canDrawConcurrently="YES" id="r2X-Fs-OkJ">
-                            <rect key="frame" x="0.0" y="0.0" width="677.5" height="17"/>
+                            <rect key="frame" x="0.0" y="0.0" width="677" height="17"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>

@@ -78,20 +78,22 @@
      viewForTableColumn: ( NSTableColumn* )_Column
                     row: ( NSInteger )_Row
     {
-    NSTableCellView* cell = [ _TableView makeViewWithIdentifier: NSLocalizedString( @"Pic Name", nil ) owner: self ];
+    NSButton* button = [ [ [ NSButton alloc ] init ] autorelease ];
+    [ button setBezelStyle: NSRecessedBezelStyle ];
 
     NSString* columnID = [ _Column identifier ];
     if ( [ columnID isEqualToString: NSLocalizedString( @"Pic Name", nil ) ] )
         {
-        [ [ cell imageView ] setImage: [ self._pics[ _Row ] _image ] ];
-        [ [ cell textField ] setStringValue: [ self._pics[ _Row ] _name ] ];
+        [ button setImage: [ self._pics[ _Row ] _image ] ];
+        [ button setTitle: [ self._pics[ _Row ] _name ] ];
+        [ button setImagePosition: NSImageLeft ];
         }
     else if ( [ columnID isEqualToString: NSLocalizedString( @"Absolute Path", nil ) ] )
         {
-        [ [ cell textField ] setStringValue: [ self._pics[ _Row ] _absolutePath ].absoluteString ];
+        [ button setTitle: [ self._pics[ _Row ] _absolutePath ].absoluteString ];
         }
 
-    return cell;
+    return button;
     }
 
 #pragma mark IBActions
