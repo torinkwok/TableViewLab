@@ -26,38 +26,38 @@
  **                   \\    _  _\\| \//  |//_   _ \// _                     **
  **                  ^ `^`^ ^`` `^ ^` ``^^`  `^^` `^ `^                     **
  **                                                                         **
- **                       Copyright (c) 2014 Tong G.                        **
+ **                       Copyright (c) 2014s Tong G.                        **
  **                          ALL RIGHTS RESERVED.                           **
  **                                                                         **
  ****************************************************************************/
 
-#import <Cocoa/Cocoa.h>
+#define __THROW_EXCEPTION__WHEN_INVOKED_PURE_METHOD__           \
+    @throw [ NSException exceptionWithName: NSGenericException  \
+                         reason: [ NSString stringWithFormat: @"unimplemented pure virtual method `%@` in `%@` " \
+                                                               "from instance: %p" \
+                                                            , NSStringFromSelector( _cmd )          \
+                                                            , NSStringFromClass( [ self class ] )   \
+                                                            , self ]                                \
+                         userInfo: nil ]
 
-@class TVLEnableSelectionButton;
 
-// TVLMainWindowController class
-@interface TVLMainWindowController : NSWindowController
-    <NSTableViewDataSource, NSTableViewDelegate, NSUserInterfaceValidations /* Conforms <NSErrorRecoveryAttempting> imformal protocol */>
 
-@property ( assign ) IBOutlet NSWindow* _mainWindow;
+#if DEBUG
+#   define __CAVEMEN_DEBUGGING__PRINT_WHICH_METHOD_INVOKED__   \
+        NSLog( @"-[ %@ %@ ] be invoked"                        \
+            , NSStringFromClass( [ self class ] )              \
+            , NSStringFromSelector( _cmd )                     \
+            )
+#else
+#   define __CAVEMEN_DEBUGGING__PRINT_WHICH_METHOD_INVOKED__
+#endif
 
-// Data source
-@property ( retain, atomic ) NSMutableArray* _pics;
+#define IBACTION_BUT_NOT_FOR_IB IBAction
 
-@property ( assign ) IBOutlet NSTableView* _picsTableView;
-@property ( assign ) IBOutlet NSButton* _importPicsButton;
-@property ( retain ) NSOpenPanel* _importPicsOpenPanel;
+#define USER_DEFAULTS  [ NSUserDefaults standardUserDefaults ]
+#define NOTIFICATION_CENTER [ NSNotificationCenter defaultCenter ]
 
-@property ( assign ) IBOutlet TVLEnableSelectionButton* _enableSelectionButton;
-
-+ ( id ) mainWindowController;
-
-#pragma mark IBActions
-- ( IBAction ) importPics: ( id )_Sender;
-
-@end // TVLMainWindowController
-
-/////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 
 /****************************************************************************
  **                                                                        **

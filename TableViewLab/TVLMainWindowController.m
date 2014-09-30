@@ -33,6 +33,11 @@
 
 #import "TVLMainWindowController.h"
 #import "TVLPic.h"
+#import "TVLEnableSelectionButton.h"
+
+// Constants
+NSString* kTableViewColumnPicNameIdentifier = @"Pic Name";
+NSString* kTableViewColumnAbsolutePathIdentifier = @"Absolute Path";
 
 // TVLMainWindowController class
 @implementation TVLMainWindowController
@@ -45,6 +50,8 @@
 @synthesize _picsTableView;
 @synthesize _importPicsButton;
 @synthesize _importPicsOpenPanel;
+
+@synthesize _enableSelectionButton;
 
 #pragma mark Initializers
 + ( id ) mainWindowController
@@ -78,22 +85,44 @@
      viewForTableColumn: ( NSTableColumn* )_Column
                     row: ( NSInteger )_Row
     {
-    NSButton* button = [ [ [ NSButton alloc ] init ] autorelease ];
-    [ button setBezelStyle: NSRecessedBezelStyle ];
+    id cellInPicNameColumn = [ _TableView makeViewWithIdentifier: kTableViewColumnPicNameIdentifier owner: self ];
+    id cellInAbsoultePathColumn = [ _TableView makeViewWithIdentifier: kTableViewColumnAbsolutePathIdentifier owner: self ];
 
     NSString* columnID = [ _Column identifier ];
-    if ( [ columnID isEqualToString: NSLocalizedString( @"Pic Name", nil ) ] )
+    if ( [ columnID isEqualToString: kTableViewColumnPicNameIdentifier ] )
         {
-        [ button setImage: [ self._pics[ _Row ] _image ] ];
-        [ button setTitle: [ self._pics[ _Row ] _name ] ];
-        [ button setImagePosition: NSImageLeft ];
+        [ cellInPicNameColumn setImage: [ self._pics[ _Row ] _image ] ];
+        [ cellInPicNameColumn setTitle: [ self._pics[ _Row ] _name ] ];
+        [ cellInPicNameColumn setImagePosition: NSImageLeft ];
+
+        return cellInPicNameColumn;
         }
-    else if ( [ columnID isEqualToString: NSLocalizedString( @"Absolute Path", nil ) ] )
+    else if ( [ columnID isEqualToString: kTableViewColumnAbsolutePathIdentifier ] )
         {
-        [ button setTitle: [ self._pics[ _Row ] _absolutePath ].absoluteString ];
+        [ cellInAbsoultePathColumn setTitle: [ self._pics[ _Row ] _absolutePath ].absoluteString ];
+
+        return cellInAbsoultePathColumn;
         }
 
-    return button;
+    return nil;
+    }
+
+- ( BOOL ) selectionShouldChangeInTableView: ( NSTableView* )_TableView
+    {
+    if ( [ self._enableSelectionButton state ] == NSOnState )
+        return YES;
+    else
+        return NO;
+    }
+
+- ( void ) tableViewSelectionIsChanging: ( NSNotification* )_Notif
+    {
+    __CAVEMEN_DEBUGGING__PRINT_WHICH_METHOD_INVOKED__;
+    }
+
+- ( void ) tableViewSelectionDidChange: ( NSNotification* )_Notif
+    {
+    __CAVEMEN_DEBUGGING__PRINT_WHICH_METHOD_INVOKED__;
     }
 
 #pragma mark IBActions
@@ -137,17 +166,22 @@
 
                 for ( NSURL* url in dirEnumerator )
                     {
-                    if ( ![ [ url pathExtension ] isEqualToString: @"png" ]
-                            || ![ [ url pathExtension ] isEqualToString: @"jpeg" ]
-                            || ![ [ url pathExtension ] isEqualToString: @"jpg" ] )
+                    if ( [ [ url pathExtension ] caseInsensitiveCompare: @"png" ] == NSOrderedSame
+                            || [ [ url pathExtension ] caseInsensitiveCompare: @"jpeg" ] == NSOrderedSame
+                            || [ [ url pathExtension ] caseInsensitiveCompare: @"jpg" ] == NSOrderedSame )
+                        [ self._pics addObject: [ TVLPic picWithURL: url ] ];
+                    else
                         [ dirEnumerator skipDescendents ];
-
-                    [ self._pics addObject: [ TVLPic picWithURL: url ] ];
                     }
 
                 [ self._picsTableView reloadData ];
                 }
             } ];
+    }
+
+- ( IBAction ) changedEnableSelection: ( id )_Sender
+    {
+    [ USER_DEFAULTS setBool: self._enableSelectionButton.state forKey: TVLEnableSelectionButtonState ];
     }
 
 #pragma mark Errors Handling
@@ -210,6 +244,65 @@
         }
 
     return [ super willPresentError: _IncomingError ];
+    }
+
+#pragma mark NSTableView
+- ( IBAction ) testingForRowSelection: ( id )_Sender
+    {
+    NSIndexSet* indexes = [ self._picsTableView selectedRowIndexes ];
+    NSLog( @"selectedRowIndexes: %@", indexes );
+
+    NSLog( @"selectedRow: %ld", [ self._picsTableView selectedRow ] );
+
+    NSLog( @"numberOfSelectedRows: %ld", [ self._picsTableView numberOfSelectedRows ] );
+
+    NSLog( @"isRowSelected: %@", [ self._picsTableView isRowSelected: 5 ] ? @"YES" : @"NO" );
+
+    printf( "\n\n" );
+    }
+
+- ( void ) keyDown: ( NSEvent* )_Event
+    {
+    NSString* charactersIngoringModifiers = [ _Event charactersIgnoringModifiers ];
+    NSUInteger modifierFlags = [ _Event modifierFlags ];
+
+    if ( [ charactersIngoringModifiers caseInsensitiveCompare: @"a" ] == NSOrderedSame
+            && ( ( modifierFlags & NSCommandKeyMask ) && modifierFlags & NSShiftKeyMask ) )
+        {
+        [ self._picsTableView selectAll: self ];
+
+        return;
+        }
+    else if ( [ charactersIngoringModifiers caseInsensitiveCompare: @"d" ] == NSOrderedSame
+            && ( ( modifierFlags & NSCommandKeyMask ) && modifierFlags & NSShiftKeyMask ) )
+        {
+        [ self._picsTableView deselectAll: self ];
+
+        return;
+        }
+
+    [ super keyDown: _Event ];
+    }
+
+- ( IBAction ) testingForSelectingAndDeselecting: ( id )_Sender
+    {
+
+    }
+
+- ( IBAction ) logItems: ( id )_Sender
+    {
+
+    }
+
+- ( BOOL ) validateUserInterfaceItem: ( id <NSValidatedUserInterfaceItem> )_Item
+    {
+    NSLog( @"Selected row indexes: %@", [ self._picsTableView selectedRowIndexes ] );
+    if ( [ _Item action ] == @selector( logItems: )
+            && [ self._picsTableView clickedRow ] == -1
+            && ![ [ self._picsTableView selectedRowIndexes ] containsIndex: [ self._picsTableView clickedRow ] ] )
+        return NO;
+
+    return YES;
     }
 
 @end // TVLMainWindowController

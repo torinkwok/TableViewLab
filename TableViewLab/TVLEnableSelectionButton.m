@@ -31,31 +31,20 @@
  **                                                                         **
  ****************************************************************************/
 
-#import <Cocoa/Cocoa.h>
+#import "TVLEnableSelectionButton.h"
 
-@class TVLEnableSelectionButton;
+// Keys for User Defaults
+NSString* const TVLEnableSelectionButtonState = @"TVLEnableSelectionButtonState";
 
-// TVLMainWindowController class
-@interface TVLMainWindowController : NSWindowController
-    <NSTableViewDataSource, NSTableViewDelegate, NSUserInterfaceValidations /* Conforms <NSErrorRecoveryAttempting> imformal protocol */>
+// TVLEnableSelectionButton class
+@implementation TVLEnableSelectionButton
 
-@property ( assign ) IBOutlet NSWindow* _mainWindow;
+- ( void ) awakeFromNib
+    {
+    [ self setState: [ USER_DEFAULTS boolForKey: TVLEnableSelectionButtonState ] ];
+    }
 
-// Data source
-@property ( retain, atomic ) NSMutableArray* _pics;
-
-@property ( assign ) IBOutlet NSTableView* _picsTableView;
-@property ( assign ) IBOutlet NSButton* _importPicsButton;
-@property ( retain ) NSOpenPanel* _importPicsOpenPanel;
-
-@property ( assign ) IBOutlet TVLEnableSelectionButton* _enableSelectionButton;
-
-+ ( id ) mainWindowController;
-
-#pragma mark IBActions
-- ( IBAction ) importPics: ( id )_Sender;
-
-@end // TVLMainWindowController
+@end // TVLEnableSelectionButton
 
 /////////////////////////////////////////////////////////////////////////////
 

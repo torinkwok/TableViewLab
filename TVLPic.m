@@ -61,6 +61,11 @@
     return self;
     }
 
+- ( void ) logSelf: ( id )_Sender
+    {
+    NSLog( @"%@: %@", self._name, self._absolutePath );
+    }
+
 @end // TVLPic
 
 /////////////////////////////////////////////////////////////////////////////

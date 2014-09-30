@@ -120,6 +120,12 @@
                                     <action selector="print:" target="-1" id="qaZ-4w-aoO"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="kVd-Dk-yh1"/>
+                            <menuItem title="Import Pics..." keyEquivalent="I" id="byv-hy-SMw">
+                                <connections>
+                                    <action selector="importPics:" target="-1" id="q2J-9f-ohm"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -655,6 +661,25 @@
                             <menuItem title="TableViewLab Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                 <connections>
                                     <action selector="showHelp:" target="-1" id="y7X-2Q-9no"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="NSViewTable" id="OAY-Zq-xUi">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="NSViewTable" id="L9J-2R-CzE">
+                        <items>
+                            <menuItem title="Testing for Row Selection" id="UTh-cS-s6H">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="testingForRowSelection:" target="-1" id="Px7-Z5-74v"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Testing for Selecting &amp; Deselecting" id="puN-BE-HDl">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="testingForSelectingAndDeselecting:" target="-1" id="aRn-Gl-bpJ"/>
                                 </connections>
                             </menuItem>
                         </items>
